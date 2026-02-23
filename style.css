@@ -1,0 +1,183 @@
+/* ── Reset & Variables ── */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg: #f5f0e8;
+    --surface: #fffdf8;
+    --accent: #e05c2e;
+    --accent-light: #f9ede7;
+    --text: #1a1612;
+    --text-muted: #8a7f75;
+    --border: #e2d9ce;
+    --shadow: 0 2px 12px rgba(60, 40, 20, 0.10);
+    --radius: 14px;
+}
+
+/* ── Base ── */
+body {
+    background-color: var(--bg);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 48px 16px 80px;
+    color: var(--text);
+}
+
+/* ── Heading ── */
+h1 {
+    font-size: clamp(2.2rem, 6vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    margin-bottom: 36px;
+    position: relative;
+    line-height: 1.1;
+}
+
+/* ── Input Row ── */
+.input-row {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    max-width: 520px;
+    margin-bottom: 32px;
+}
+
+.input {
+    flex: 1;
+    padding: 14px 18px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input::placeholder {
+    color: var(--text-muted);
+}
+
+.input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(224, 92, 46, 0.12);
+}
+
+/* ── Submit Button ── */
+button[onclick] {
+    padding: 14px 24px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.18s, transform 0.12s;
+}
+
+button[onclick]:hover {
+    background: #c44a1f;
+}
+
+button[onclick]:active {
+    transform: scale(0.96);
+}
+
+/* ── Task Container ── */
+#displayText {
+    width: 100%;
+    max-width: 520px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* ── Individual Task ── */
+#displayText > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    box-shadow: var(--shadow);
+    animation: slideIn 0.22s ease;
+    transition: border-color 0.2s;
+}
+
+#displayText > div:hover {
+    border-color: var(--accent);
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ── Task Text ── */
+#displayText > div p {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--text);
+    flex: 1;
+    word-break: break-word;
+}
+
+/* ── Delete Button ── */
+#displayText > div button {
+    padding: 7px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    background: var(--accent-light);
+    color: var(--accent);
+    border: 1.5px solid rgba(224, 92, 46, 0.25);
+    border-radius: 8px;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.18s, color 0.18s, transform 0.12s;
+}
+
+#displayText > div button:hover {
+    background: var(--accent);
+    color: #fff;
+}
+
+#displayText > div button:active {
+    transform: scale(0.94);
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+    .input-row {
+        flex-direction: column;
+    }
+
+    button[onclick] {
+        width: 100%;
+    }
+
+    #displayText > div {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}
